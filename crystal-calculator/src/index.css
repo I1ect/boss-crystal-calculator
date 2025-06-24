@@ -4,25 +4,94 @@ body {
   margin: 15px;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: lightgray;
   line-height: 6px;
+  background-color: black;
+  justify-content: center;
 }
 
 .boss-element {
-  border: 5px solid black;
+  border: 5px solid white;
   border-radius: 10px;
   margin: 20px;
   padding: 5px;
-  width: 80vw;
-  height: 80px;
+  width: 750px;
+  height: 120px;
   font-weight: bold;
+  display: grid;
+  grid-template-areas: "image name difficulty crystal" "image selector selector weekly";
+  grid-template-columns: 20% 20% 20% 40%;
+  box-shadow: 7px 7px hsl(0, 0%, 26%);
+  background-color: lightgray;
 }
 
 .boss-image {
   display: flex;
   border: 5px solid black;
-  border-radius: 2px;
-  width: 60px;
-  height: 60px;
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
   margin: 5px;
+  grid-area: image;
+  align-items: center;
+}
+
+.boss-name {
+  display: flex;
+  grid-area: name;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.boss-difficulty {
+  display: flex;
+  grid-area: difficulty;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.crystal-value {
+  display: flex;
+  grid-area: crystal;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+.weekly-value {
+  display: flex;
+  grid-area: weekly;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.clear-selector {
+  display: flex;
+  grid-area: selector;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  line-height: 20px;
+  margin-top: 5px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+.values {
+  margin: 10px;
+  border-radius: 5px;
+  border-width: 5px;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px;
+  color: white;
 }

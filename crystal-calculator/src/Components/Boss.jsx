@@ -1,20 +1,25 @@
+import Power from '../assets/power_crystal.png'
+import Power_Week from '../assets/power_crystal_weekly.png'
+
 
 function Boss(props) {
 
     return (
     <div className="boss-element">
-        <img className="boss-image">{props.image}</img>
+        <img className="boss-image" src={props.image}></img>
         <h1 className="boss-name">{props.name} </h1>
-        <span className="boss-difficulty">{props.difficulty} </span>
-        <span className="crystal-value">Crystal Value: {props.crystalValue} </span>
-        <span className="is-weekly">{props.isWeekly ? " Weekly ":" Daily "}</span>
-        <span>
-            <label>Difficulty </label>
-            <select>
-                <option value="normal">Normal</option>
-                <option value="normal">Hard</option>
+        <h2 className="boss-difficulty">{props.difficulty} </h2>
+        <h2 className="crystal-value"><img src={props.isWeekly ? Power_Week:Power}></img>{props.crystalValue.toLocaleString()}</h2>
+        <h2 className="weekly-value">{props.isWeekly ? null:<><img src={Power_Week}></img>{(props.crystalValue * 7).toLocaleString()}</>}</h2>
+        <h2 className="clear-selector">
+            <label>Clear Difficulty </label>
+            <select className="values">
+                <option value="none">None</option>
+                <option value="min">Min Clear</option>
+                <option value="medium">Medium Effort</option>
+                <option value="easy">Easy</option>
             </select>
-        </span>
+        </h2>
     </div>
     )
 }
