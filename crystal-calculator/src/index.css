@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: lightgray;
+  line-height: 6px;
+}
+
+.boss-element {
+  border: 5px solid black;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 5px;
+  width: 80vw;
+  height: 80px;
+  font-weight: bold;
+}
+
+.boss-image {
+  display: flex;
+  border: 5px solid black;
+  border-radius: 2px;
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+}
