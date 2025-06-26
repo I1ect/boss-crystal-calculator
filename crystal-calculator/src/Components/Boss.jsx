@@ -12,12 +12,14 @@ function Boss(props) {
         <h2 className="crystal-value"><img src={props.isWeekly ? Power_Week:Power}></img>{props.crystalValue.toLocaleString()}</h2>
         <h2 className="weekly-value">{props.isWeekly ? null:<><img src={Power_Week}></img>{(props.crystalValue * 7).toLocaleString()}</>}</h2>
         <h2 className="clear-selector">
-            <label>Clear Difficulty </label>
+            <label>Effort </label>
             <select className="values">
                 <option value="none">None</option>
-                <option value="min">Min Clear</option>
-                <option value="medium">Medium Effort</option>
-                <option value="easy">Easy</option>
+                <option value="minclear">Min Clear</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="easy">Easy </option>
+                <option value="burst">1 Burst</option>
             </select>
         </h2>
     </div>
