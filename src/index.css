@@ -114,3 +114,17 @@ h2 {
   margin: 50px;
   color: white;
 }
+
+.information-section {
+  font-size: 2rem;
+  width: 700px;
+  height: 300px;
+  color: white;
+  border: 5px solid white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-left: 10px;
+}
+
+.information-section input[type="checkbox"] {
+}

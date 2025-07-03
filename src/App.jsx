@@ -30,8 +30,12 @@ import Kalos from './assets/kalos.png'
 import Kaling from './assets/kaling.png'
 import Limbo from './assets/limbo.png'
 
+import { useState } from 'react'
+
 
 function App() {
+
+  const [isHeroic, setIsHeroic] = useState(false)
 
   const bosses = {
     zakum: {name: "Zakum", image: Zakum, difficulties: 
@@ -87,20 +91,76 @@ function App() {
       {normal: {id: 32, difficulty: "Normal", value: 16200000, isWeekly: true}}},
     akechi: {name: "Akechi", image: Akechi, difficulties: 
       {normal: {id: 35, difficulty: "Normal", value: 28800000, isWeekly: true}}},
+    lotus: {name: "Lotus", image: Lotus, difficulties: 
+      {normal: {id: 36, difficulty: "Normal", value: 32512500, isWeekly: true},
+      hard: {id: 37, difficulty: "Hard", value: 74112500, isWeekly: true},
+      extreme: {id: 38, difficulty: "Extreme",value: 221000000, isWeekly: true}}},
+    damien: {name: "Damien", image: Damien, difficulties: 
+      {normal: {id: 39, difficulty: "Normal", value: 33800000, isWeekly: true},
+      hard: {id: 40, difficulty: "Hard", value: 70312500, isWeekly: true}}},
+    slime: {name: "Guardian Angel Slime", image: Slime, difficulties: 
+      {normal: {id: 41, difficulty: "Normal", value: 34322000, isWeekly: true},
+      chaos: {id: 42, difficulty: "Chaos", value: 95731250, isWeekly: true}}},
+    lucid: {name: "Lucid", image: Lucid, difficulties: 
+      {easy: {id: 43, difficulty: "Easy", value: 35112500, isWeekly: true},
+      normal: {id: 44, difficulty: "Normal", value: 40612500, isWeekly: true},
+      hard: {id: 45, difficulty: "Hard", value: 80000000, isWeekly: true}}},
+    will: {name: "Will", image: Will, difficulties: 
+      {easy: {id: 46, difficulty: "Easy", value: 38255000, isWeekly: true},
+      normal: {id: 47, difficulty: "Normal", value: 46512500, isWeekly: true},
+      hard: {id: 48, difficulty: "Hard", value: 97020000, isWeekly: true}}},
+    gloom: {name: "Gloom", image: Gloom, difficulties: 
+      {normal: {id: 49, difficulty: "Normal", value: 49612500, isWeekly: true},
+      chaos: {id: 50, difficulty: "Chaos", value: 92450000, isWeekly: true}}},
+    darknell: {name: "Darknell", image: Darknell, difficulties: 
+      {normal: {id: 51, difficulty: "Normal", value: 31687500, isWeekly: true },
+      hard: {id: 52, difficulty: "Hard", value: 66792000, isWeekly: true }}},
+    vhilla: {name: "Verus Hilla", image: Vhilla, difficulties: 
+      {normal: {id: 53, difficulty: "Normal", value: 58188000, isWeekly: true},
+      hard: {id: 54, difficulty: "Hard", value: 76210550, isWeekly: true}}},
+    seren: {name: "Chosen Seren", image: Seren, difficulties:
+      {normal: {id: 55, difficulty: "Normal", value: 889021875, isWeekly: true},
+      hard: {id: 56, difficulty: "Hard", value: 1096560000, isWeekly: true},
+      extreme: {id: 57, difficulty: "Extreme", value: 4235000000, isWeekly: true}}},
+    kalos: {name: "Kalos", image: Kalos, difficulties: 
+      {easy: {id: 58, difficulty: "Easy", value: 937500000, isWeekly: true },
+      normal: {id: 59, difficulty: "Normal", value: 1300000000, isWeekly: true },
+      chaos: {id: 60, difficulty: "Chaos", value: 2600000000, isWeekly: true },
+      extreme: {id: 61, difficulty: "Extreme", value: 5200000000, isWeekly: true}}},
+    kaling: {name: "Kaling", image: Kaling, difficulties: 
+      {easy: {id: 62, difficulty: "Easy", value: 1031250000, isWeekly: true },
+      normal: {id: 63, difficulty: "Normal", value: 1506500000, isWeekly: true },
+      hard: {id: 64, difficulty: "Hard", value: 2990000000, isWeekly: true },
+      extreme: {id: 65, difficulty: "Extreme", value: 6026000000, isWeekly: true }}},
+    limbo: {name: "Limbo", image: Limbo, difficulties: 
+      {normal: {id: 66, difficulty: "Normal", value: 420000000, isWeekly: true },
+      hard: {id: 67, difficulty: "Hard",   value: 749000000, isWeekly: true }}},
   }
 
   const daily_bosses = Object.values(bosses).flatMap(boss => Object.values(boss.difficulties).filter(diff => !diff.isWeekly).map((diff) => (
-    <Boss image={boss.image} name={boss.name} difficulty={diff.difficulty} crystalValue={diff.value} isWeekly={diff.isWeekly}></Boss>
+    <Boss image={boss.image} name={boss.name} difficulty={diff.difficulty} crystalValue={isHeroic ? diff.value * 3 : diff.value} isWeekly={diff.isWeekly}></Boss>
   )))
 
   const weekly_bosses = Object.values(bosses).flatMap(boss => Object.values(boss.difficulties).filter(diff => diff.isWeekly).map((diff) => (
-    <Boss image={boss.image} name={boss.name} difficulty={diff.difficulty} crystalValue={diff.value} isWeekly={diff.isWeekly}></Boss>
+    <Boss image={boss.image} name={boss.name} difficulty={diff.difficulty} crystalValue={isHeroic ? diff.value * 3 : diff.value} isWeekly={diff.isWeekly}></Boss>
   )))
+
+  const changeState = (e) => (
+    setIsHeroic(e.target.checked)
+  )
+
+  
 
   return (
     <>
       <title>Boss Crystal Calculator</title>
-      <div className='title'>Daily</div>
+      <div className='title'>
+        Daily
+      </div>
+      <div className='information-section'>
+        <input type='checkbox' className='heroic-check' name='Heroic' onChange={changeState}/>
+        <label>Heroic</label>
+      </div>
       <div className='dailies'>
         {daily_bosses}
       </div>
@@ -109,38 +169,6 @@ function App() {
       <div className='title'>Weekly</div>
       <div className='weeklies'>
         {weekly_bosses}
-      <Boss alt="lotus" image={Lotus} name="Lotus" difficulty="Normal" crystalValue={32512500} isWeekly={true}/>
-      <Boss alt="damien" image={Damien} name="Damien" difficulty="Normal" crystalValue={33800000} isWeekly={true}/>
-      <Boss alt="slime" image={Slime} name="Slime" difficulty="Normal" crystalValue={46334700} isWeekly={true}/>
-      <Boss alt="lucid" image={Lucid} name="Lucid" difficulty="Easy" crystalValue={47401875} isWeekly={true}/>
-      <Boss alt="will" image={Will} name="Will" difficulty="Easy" crystalValue={49348950} isWeekly={true}/>
-      <Boss alt="lucid" image={Lucid} name="Lucid" difficulty="Normal" crystalValue={50765625} isWeekly={true}/>
-      <Boss alt="will" image={Will} name="Will" difficulty="Normal" crystalValue={55815000} isWeekly={true}/>
-      <Boss alt="gloom" image={Gloom} name="Gloom" difficulty="Normal" crystalValue={59535000} isWeekly={true}/>
-      <Boss alt="darknell" image={Darknell} name="Darknell" difficulty="Normal" crystalValue={63375000} isWeekly={true}/>
-      <Boss alt="damien" image={Damien} name="Damien" difficulty="Hard" crystalValue={84375000} isWeekly={true}/>
-      <Boss alt="lotus" image={Lotus} name="Lotus" difficulty="Hard" crystalValue={88935000} isWeekly={true}/>
-      <Boss alt="lucid" image={Lucid} name="Lucid" difficulty="Hard" crystalValue={100800000} isWeekly={true}/>
-      <Boss alt="gloom" image={Gloom} name="Gloom" difficulty="Chaos" crystalValue={112789000} isWeekly={true}/>
-      <Boss alt="vhilla" image={Vhilla} name="Vhilla" difficulty="Normal" crystalValue={116376000} isWeekly={true}/>
-      <Boss alt="will" image={Will} name="Will" difficulty="Hard" crystalValue={124362000} isWeekly={true}/>
-      <Boss alt="darknell" image={Darknell} name="Darknell" difficulty="Hard" crystalValue={133584000} isWeekly={true}/>
-      <Boss alt="vhilla" image={Vhilla} name="Vhilla" difficulty="Hard" crystalValue={152421000} isWeekly={true}/>
-      <Boss alt="seren" image={Seren} name="Seren" difficulty="Normal" crystalValue={177804375} isWeekly={true}/>
-      <Boss alt="kalos" image={Kalos} name="Kalos" difficulty="Easy" crystalValue={187500000} isWeekly={true}/>
-      <Boss alt="kaling" image={Kaling} name="Kaling" difficulty="Easy" crystalValue={206250000} isWeekly={true}/>
-      <Boss alt="seren" image={Seren} name="Seren" difficulty="Hard" crystalValue={219312500} isWeekly={true}/>
-      <Boss alt="kalos" image={Kalos} name="Kalos" difficulty="Normal" crystalValue={260000000} isWeekly={true}/>
-      <Boss alt="lotus" image={Lotus} name="Lotus" difficulty="Extreme" crystalValue={279500000} isWeekly={true}/>
-      <Boss alt="kaling" image={Kaling} name="Kaling" difficulty="Normal" crystalValue={301300000} isWeekly={true}/>
-      <Boss alt="limbo" image={Limbo} name="Limbo" difficulty="Normal" crystalValue={420000000} isWeekly={true}/>
-      <Boss alt="kalos" image={Kalos} name="Kalos" difficulty="Chaos" crystalValue={520000000} isWeekly={true}/>
-      <Boss alt="kaling" image={Kaling} name="Kaling" difficulty="Hard" crystalValue={598000000} isWeekly={true}/>
-      <Boss alt="limbo" image={Limbo} name="Limbo" difficulty="Hard" crystalValue={749000000} isWeekly={true}/>
-      <Boss alt="seren" image={Seren} name="Seren" difficulty="Extreme" crystalValue={847000000} isWeekly={true}/>
-      <Boss alt="kalos" image={Kalos} name="Kalos" difficulty="Extreme" crystalValue={1040000000} isWeekly={true}/>
-      <Boss alt="kaling" image={Kaling} name="Kaling" difficulty="Hard" crystalValue={1205200000} isWeekly={true}/>
-      
       </div>
       
       </>
